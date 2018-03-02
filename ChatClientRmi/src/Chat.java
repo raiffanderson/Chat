@@ -6,10 +6,6 @@ public interface Chat extends Remote {
 
 	public void send(String msg) throws RemoteException;
 
-	public void setClient(Chat c) throws RemoteException;
-
-	public Chat getClient() throws RemoteException;
-
 	public void enviarMensagem(String mensagem) throws RemoteException;
 
 	public ArrayList<String> lerMensagem() throws RemoteException;

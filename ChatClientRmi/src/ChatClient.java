@@ -1,22 +1,22 @@
-import java.rmi.*;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.rmi.server.*;
-import java.util.*;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.util.Scanner;
 
 public class ChatClient {
+	private static Scanner scanner;
+
 	public static void main(String[] argv) {
 		try {
 			final Chat stub = (Chat) Naming.lookup("rmi://localhost:2020/ServerChat");
 
 			String nome;
 			String msg = "";
-			Scanner scanner = new Scanner(System.in);
+			scanner = new Scanner(System.in);
 
 			System.out.print("Digite seu nome:");
 
-			nome = scanner.nextLine();
-
+			nome = scanner.next();
+			
 			Thread thread = new Thread(new Runnable() {
 				int cont = stub.lerMensagem().size();
 
@@ -25,7 +25,13 @@ public class ChatClient {
 					try {
 						while (true) {
 							if (stub.lerMensagem().size() > cont) {
-								System.out.println(stub.lerMensagem().get(stub.lerMensagem().size() - 1));
+								String lastMsg = "\t"+stub.lerMensagem().get(stub.lerMensagem().size() - 1);
+								if (lastMsg.endsWith(": ")){
+									System.out.println(lastMsg + " Entrou no Grupo.");
+								}
+									else{
+									System.out.println(lastMsg);
+								}
 								cont++;
 							}
 						}
@@ -35,18 +41,16 @@ public class ChatClient {
 				}
 			});
 			thread.start();
-
 			while (msg != "exit") {
-
-				System.out.print(nome + ": ");
-
+				
 				msg = scanner.nextLine();
-
 				stub.enviarMensagem(nome + ": " + msg);
 			}
 
-		} catch (Exception e) {
-			System.out.println("[ERRO]: " + e);
-		}
+		}catch(
+
+	Exception e)
+	{
+		System.out.println("[ERRO]: " + e);
 	}
-}
+}}

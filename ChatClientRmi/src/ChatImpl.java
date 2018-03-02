@@ -4,9 +4,6 @@ import java.util.ArrayList;
  
 public class ChatImpl extends UnicastRemoteObject implements Chat  {
  
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private Chat client=null;
@@ -19,14 +16,6 @@ public class ChatImpl extends UnicastRemoteObject implements Chat  {
 	}
 	public String getName() throws RemoteException {
 		return this.name;
-	}
- 
-	public void setClient(Chat c){
-		client=c;
-	}
- 
-	public Chat getClient(){
-		return client;
 	}
  
 	public void send(String s) throws RemoteException{
