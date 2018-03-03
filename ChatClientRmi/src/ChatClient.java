@@ -18,14 +18,14 @@ public class ChatClient {
 			nome = scanner.next();
 			
 			Thread thread = new Thread(new Runnable() {
-				int cont = stub.lerMensagem().size();
+				int cont = stub.getMensagens().size();
 
 				@Override
 				public void run() {
 					try {
 						while (true) {
-							if (stub.lerMensagem().size() > cont) {
-								String lastMsg = "\t"+stub.lerMensagem().get(stub.lerMensagem().size() - 1);
+							if (stub.getMensagens().size() > cont) {
+								String lastMsg = "\t"+stub.getMensagens().get(stub.getMensagens().size() - 1);
 								if (lastMsg.endsWith(": ")){
 									System.out.println(lastMsg + " Entrou no Grupo.");
 								}
